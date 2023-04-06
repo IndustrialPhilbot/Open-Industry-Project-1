@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4167159133029870746}
   - component: {fileID: 4167159133029870745}
   - component: {fileID: 4167159133029870741}
+  - component: {fileID: 5242287783427980461}
   - component: {fileID: 4167159133029870740}
-  - component: {fileID: 4167159133029870758}
   m_Layer: 6
   m_Name: Power Turn
   m_TagString: Untagged
@@ -100,6 +100,20 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: eead418b2e9bb7048bf9115a8ac8f4f3, type: 3}
+--- !u!114 &5242287783427980461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167159133029870750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f16743053bacb6458ef260ae791e4c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  running: 1
+  speed: 1
 --- !u!54 &4167159133029870740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,17 +130,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 94
   m_CollisionDetection: 0
---- !u!114 &4167159133029870758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4167159133029870750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f16743053bacb6458ef260ae791e4c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  running: 1
-  speed: 1

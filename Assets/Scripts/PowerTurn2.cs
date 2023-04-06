@@ -21,6 +21,7 @@ public class PowerTurn : MonoBehaviour
 
     void Update()
     {
+        //test
         if (running)
         {
             rb.centerOfMass = centerOfMass;
