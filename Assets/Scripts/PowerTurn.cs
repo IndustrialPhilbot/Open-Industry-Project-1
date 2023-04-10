@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerTurn : MonoBehaviour
@@ -21,7 +19,6 @@ public class PowerTurn : MonoBehaviour
 
     void Update()
     {
-        //test
         if (running)
         {
             rb.centerOfMass = centerOfMass;
