@@ -664,7 +664,7 @@ MonoBehaviour:
   rollers: {fileID: 4387875794235044004}
   rollersUp: {fileID: 0}
   rollersDown: {fileID: 0}
-  rollerPrefab: {fileID: 9072021378553872909, guid: 1c977df1fb2948540a2820050b8f4fc6, type: 3}
+  rollerPrefab: {fileID: 9072021378553872909, guid: f085132a2e21d7a42bb51e23bf2aa70d, type: 3}
   rollerCount: 8
   curConvSize: 1.333
   convR: {fileID: 3108970732310924212}

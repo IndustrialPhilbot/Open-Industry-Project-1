@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   running: 1
-  speed: 1
+  speed: -1
 --- !u!114 &1601651365956915126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   rollers: {fileID: 7030971053313875443}
   rollersUp: {fileID: 4679093750576120317}
   rollersDown: {fileID: 7484182939725881253}
-  rollerPrefab: {fileID: 9072021378553872909, guid: 1c977df1fb2948540a2820050b8f4fc6, type: 3}
+  rollerPrefab: {fileID: 9072021378553872909, guid: f085132a2e21d7a42bb51e23bf2aa70d, type: 3}
   rollerCount: 0
   curConvSize: 2.6649997
   convR: {fileID: 0}
