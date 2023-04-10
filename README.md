@@ -6,7 +6,7 @@ The goal is to provide an open platform for developers to contribute to the crea
 
 Scroll down to the **Getting Started** section for information on how to work with this project. 
 
-Join our discord group: [Open Industry Project](https://discord.gg/Jzrb9beS)
+Join our discord group: [Open Industry Project](https://discord.gg/ACRPr6sBpH)
 
 Supported PLCs:
 
