@@ -118,8 +118,8 @@ public class ConvScaler : MonoBehaviour
     private void RotateRoller(Transform roller)
     {
         float rotationSpeed = 0;
-        if (_conveyor != null && _conveyor.conveyorRunning) rotationSpeed = _conveyor.speed * Time.deltaTime;
-        else rotationSpeed = Time.deltaTime;
+        if (_conveyor != null && _conveyor.running) rotationSpeed = _conveyor.speed * Time.deltaTime;
+        else rotationSpeed = 0;
         if (roller.parent.localEulerAngles.y != 0) rotationSpeed = -rotationSpeed;
         roller.Rotate(Vector3.forward, rotationSpeed * 220f);
     }
@@ -128,7 +128,7 @@ public class ConvScaler : MonoBehaviour
     {
         if (_conveyor != null)
         {
-            if (_conveyor.conveyorRunning)
+            if (_conveyor.running)
             {
                 convSpeed += _conveyor.speed * Time.deltaTime;
             }

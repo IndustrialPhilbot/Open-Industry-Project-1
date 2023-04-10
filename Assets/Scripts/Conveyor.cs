@@ -11,13 +11,13 @@ public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
     public string tagName;
-    public int speed = 0;
+    public float speed = 0;
     Vector3 startPos = new();
     Rigidbody rb;
     int scantime = 0;
     new readonly Tag<DintPlcMapper, int> tag = new();
     int failCount = 0;
-    public bool conveyorRunning = false;
+    public bool running = false;
 
     void Start()
     {
@@ -39,25 +39,25 @@ public class Conveyor : MonoBehaviour
             InvokeRepeating(nameof(ScanTag), 0, (float)scantime / 1000f);
         }
 
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
 
-        startPos = transform.position;
+        startPos = rb.transform.position;
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
     void Update()
     {
-        if (conveyorRunning)
+        if (running)
         {
             rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             rb.velocity = transform.TransformDirection(Vector3.left) * speed;
-            transform.position = startPos;
+            rb.transform.position = startPos;
         }
         else
         {
             if(rb.velocity != Vector3.zero && rb.velocity.y == 0)
             {
                 rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                transform.position = startPos;
+                rb.transform.position = startPos;
                 rb.velocity = Vector3.zero;
             }
             //when you stop, keep updating startPos for elevator

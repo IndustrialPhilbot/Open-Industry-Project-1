@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6256361430605213482}
   - component: {fileID: 3725046891819120425}
   - component: {fileID: 8865347232899578754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 7022110746860999686}
   - component: {fileID: 4755718956288344291}
   - component: {fileID: 2280550137830206642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4387875792807526856}
   - component: {fileID: 4387875792807526857}
   - component: {fileID: 4387875792807526862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 4387875792837106783}
   - component: {fileID: 4387875792837106780}
   - component: {fileID: 4387875792837106781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 4387875793030925539}
   - component: {fileID: 4387875793030925536}
   - component: {fileID: 4387875793030925537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 4387875793423423283}
   - component: {fileID: 4387875793423423280}
   - component: {fileID: 4387875793423423281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ConvRoller_roller(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,10 +603,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4387875793608913071}
-  - component: {fileID: 4387875793608913068}
   - component: {fileID: 4387875793608913069}
   - component: {fileID: 4387875793608913070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StraightRollerConveyor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,22 +628,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4387875793608913068
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4387875793608913059}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &4387875793608913069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +643,7 @@ MonoBehaviour:
   enablePLC: 0
   tagName: SPEED1
   speed: 1
-  conveyorRunning: 1
+  running: 1
 --- !u!114 &4387875793608913070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,7 +677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4387875794235044004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rollers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,6 +768,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConvRoller_roller
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eae80c8c3e598674fb514363193d3040, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae80c8c3e598674fb514363193d3040, type: 3}
 --- !u!1 &3469377106918547403 stripped
@@ -868,6 +855,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: eaa922557ca59ce469488d700b8ab999, type: 3}
       propertyPath: m_Name
       value: ConvRoller_end_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eaa922557ca59ce469488d700b8ab999, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eaa922557ca59ce469488d700b8ab999, type: 3}
       propertyPath: m_IsActive
@@ -963,6 +954,10 @@ PrefabInstance:
       value: ConvRoller_end_1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eaa922557ca59ce469488d700b8ab999, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eaa922557ca59ce469488d700b8ab999, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1056,6 +1051,10 @@ PrefabInstance:
       value: ConvRoller_roller
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eae80c8c3e598674fb514363193d3040, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eae80c8c3e598674fb514363193d3040, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1139,6 +1138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Conveyor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dacb95c545f1c5740b92ab8d13d0f765, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dacb95c545f1c5740b92ab8d13d0f765, type: 3}
 --- !u!23 &3108970732310924212 stripped
@@ -1151,6 +1154,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dacb95c545f1c5740b92ab8d13d0f765, type: 3}
   m_PrefabInstance: {fileID: 4387875794049308464}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &696695243
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469377105326058081}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!65 &7928966962274532297
 BoxCollider:
   m_ObjectHideFlags: 0

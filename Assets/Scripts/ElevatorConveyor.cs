@@ -28,7 +28,7 @@ public class ElevatorConveyor : MonoBehaviour
     void Update()
     {
 
-        if (!_conveyor.conveyorRunning)
+        if (!_conveyor.running)
         {
             if (moveUp)
             {

@@ -12,9 +12,9 @@ public class PowerTurn : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        startAngle = transform.eulerAngles;
-        startPos = transform.position;
+        rb = GetComponentInChildren<Rigidbody>();
+        startAngle = rb.transform.eulerAngles;
+        startPos = rb.transform.position;
     }
 
     void Update()
@@ -24,19 +24,19 @@ public class PowerTurn : MonoBehaviour
             rb.centerOfMass = centerOfMass;
             rb.WakeUp();
             rb.angularVelocity = transform.TransformDirection(Vector3.up) * speed;
-            transform.eulerAngles = startAngle;
-            transform.position = startPos;
+            rb.transform.eulerAngles = startAngle;
+            rb.transform.position = startPos;
         }
         else
         {
             if (transform.eulerAngles != Vector3.zero)
             {
-                transform.position = startPos;
-                transform.eulerAngles = startAngle;
+                rb.transform.position = startPos;
+                rb.transform.eulerAngles = startAngle;
                 rb.angularVelocity = Vector3.zero;
             }
-            startPos = transform.position;
-            startAngle = transform.eulerAngles;
+            startPos = rb.transform.position;
+            startAngle = rb.transform.eulerAngles;
         }
     }
 }

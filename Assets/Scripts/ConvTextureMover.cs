@@ -4,7 +4,10 @@ public class ConvTextureMover : MonoBehaviour
 {
     private MeshRenderer objectRenderer;
     private Conveyor _conveyor;
+    private PowerTurn _powerTurn;
     private float convSpeed;
+    private float conveyor_speed;
+    private bool conveyor_running;
     private bool flipped;
     [SerializeField] private bool flipMaterialSlots;
     [SerializeField] private MeshRenderer[] convEnds;
@@ -15,6 +18,8 @@ public class ConvTextureMover : MonoBehaviour
         Transform conveyor = transform.Find("Conveyor");
         objectRenderer = conveyor.GetComponent<MeshRenderer>();
         _conveyor = GetComponent<Conveyor>();
+        _powerTurn = GetComponent<PowerTurn>();
+
         if (flipMaterialSlots) materialIndex = 1;
     }
 
@@ -22,29 +27,34 @@ public class ConvTextureMover : MonoBehaviour
     {
         if (_conveyor != null)
         {
-            if (_conveyor.speed < 0 && !flipped)
-            {
-                FlipConveyor();
-            }
-            else if (_conveyor.speed > 0 && flipped)
-            {
-                FlipConveyor();
-            }
-            if (_conveyor.conveyorRunning)
-            {
-                if (!flipped)
-                {
-                    convSpeed += -_conveyor.speed * Time.deltaTime;
-                }
-                else
-                {
-                    convSpeed += _conveyor.speed * Time.deltaTime;
-                }
-            }
+            conveyor_speed = _conveyor.speed;
+            conveyor_running = _conveyor.running;
+
         }
         else
         {
-            convSpeed -= Time.deltaTime;
+            conveyor_speed = _powerTurn.speed;
+            conveyor_running = _powerTurn.running;
+        }
+
+        if (conveyor_speed < 0 && !flipped)
+        {
+            FlipConveyor();
+        }
+        else if (conveyor_speed > 0 && flipped)
+        {
+            FlipConveyor();
+        }
+        if (conveyor_running)
+        {
+            if (!flipped)
+            {
+                convSpeed += -conveyor_speed * Time.deltaTime;
+            }
+            else
+            {
+                convSpeed += conveyor_speed * Time.deltaTime;
+            }
         }
 
         objectRenderer.materials[materialIndex].mainTextureOffset = new Vector2(0, convSpeed);
