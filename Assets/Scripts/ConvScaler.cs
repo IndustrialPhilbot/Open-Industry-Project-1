@@ -7,6 +7,9 @@ public class ConvScaler : MonoBehaviour
     public bool isStraightConveyor;
     private MeshRenderer objectRenderer;
     private Conveyor _conveyor;
+    private PowerTurn _powerTurn;
+    private float conveyor_speed;
+    private bool conveyor_running;
     private float convSpeed;
     [SerializeField] private bool flipMaterialSlots;
     [SerializeField] private Transform[] convEnds;
@@ -30,6 +33,7 @@ public class ConvScaler : MonoBehaviour
         Transform conveyor = transform.Find("Conveyor");
         objectRenderer = conveyor.GetComponent<MeshRenderer>();
         _conveyor = GetComponent<Conveyor>();
+        _powerTurn = GetComponent<PowerTurn>();
         if (flipMaterialSlots) materialIndex = 1;
 
         if (!isStraightConveyor)
@@ -110,7 +114,7 @@ public class ConvScaler : MonoBehaviour
         {
             foreach (var renderer in rollerRenderers)
             {
-                renderer.materials[0].mainTextureOffset = new Vector2(convSpeed * -10f, 0);
+                renderer.materials[0].mainTextureOffset = new Vector2(convSpeed * 10f, 0);
             }
         }
     }
@@ -118,7 +122,7 @@ public class ConvScaler : MonoBehaviour
     private void RotateRoller(Transform roller)
     {
         float rotationSpeed = 0;
-        if (_conveyor != null && _conveyor.running) rotationSpeed = _conveyor.speed * Time.deltaTime;
+        if (conveyor_running) rotationSpeed = conveyor_speed * Time.deltaTime;
         else rotationSpeed = 0;
         if (roller.parent.localEulerAngles.y != 0) rotationSpeed = -rotationSpeed;
         roller.Rotate(Vector3.forward, rotationSpeed * 220f);
@@ -128,14 +132,23 @@ public class ConvScaler : MonoBehaviour
     {
         if (_conveyor != null)
         {
-            if (_conveyor.running)
-            {
-                convSpeed += _conveyor.speed * Time.deltaTime;
-            }
+            conveyor_speed = _conveyor.speed;
+            conveyor_running = _conveyor.running;
+
         }
         else
         {
-            convSpeed -= Time.deltaTime;
+            conveyor_speed = _powerTurn.speed;
+            conveyor_running = _powerTurn.running;
+        }
+
+        if (conveyor_running)
+        {
+            convSpeed += conveyor_speed * Time.deltaTime;
+        }
+        else
+        {
+            convSpeed = 0;
         }
 
         MoveRollers();
