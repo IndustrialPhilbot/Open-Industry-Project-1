@@ -518,6 +518,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1022691630, guid: c4d1f358a522f8f448188affd4afba1a, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3842347224845720054, guid: c4d1f358a522f8f448188affd4afba1a, type: 3}
       propertyPath: m_Name
       value: CurvedRollerConveyor
@@ -632,6 +636,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1644762781, guid: 7e8dad8402876d24ca4ad60c8e6ae4f9, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7293560359875988706, guid: 7e8dad8402876d24ca4ad60c8e6ae4f9, type: 3}
       propertyPath: m_RootOrder
       value: 5

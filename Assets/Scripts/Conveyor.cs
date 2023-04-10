@@ -3,21 +3,24 @@ using libplctag;
 using libplctag.DataTypes;
 using libplctag.NativeImport; 
 using System;
-using UnityEditor;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
+
 
 public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
     public string tagName;
-    public float speed = 0;
+    public float speed = 1;
+    public bool running = false;
+
+    new readonly Tag<DintPlcMapper, int> tag = new();
+
     Vector3 startPos = new();
     Rigidbody rb;
+
     int scantime = 0;
-    new readonly Tag<DintPlcMapper, int> tag = new();
     int failCount = 0;
-    public bool running = false;
+
 
     void Start()
     {
