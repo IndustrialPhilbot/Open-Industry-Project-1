@@ -4,6 +4,8 @@ Free and Open-source PLC driven warehouse/manufacturing simulation made with [Un
 
 The goal is to provide an open platform for developers to contribute to the creation of virtual industrial equipment/devices and for people to be able to test their ideas or simply educate themselves using a real PLC.
 
+Scroll down to the **Getting Started** section for information on how to work with this project. 
+
 Join our discord group: [Open Industry Project](https://discord.gg/Jzrb9beS)
 
 Supported PLCs:
@@ -24,7 +26,9 @@ https://user-images.githubusercontent.com/105675984/229177437-8d8eda82-6ae5-4cdd
 
 ## Getting Started
 
-Clone the repository or download and extract the ZIP file and select the project folder directly in Unity Hub
+Clone the repository or download and extract the ZIP file and select the project folder directly in Unity Hub.
+
+For getting started with Untiy refer to: [Getting Started](https://docs.unity3d.com/560/Documentation/Manual/GettingStarted.html)
 
 ![image](https://user-images.githubusercontent.com/105675984/230959413-ad75e1fe-8ce8-49f4-bfc1-85247b67e678.png)
 
