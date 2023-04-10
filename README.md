@@ -24,7 +24,9 @@ https://user-images.githubusercontent.com/105675984/229177437-8d8eda82-6ae5-4cdd
 
 ## Getting Started
 
-Clone the repository and select the project folder directly in Unity Hub
+Clone the repository or download and extract the ZIP file and select the project folder directly in Unity Hub
+
+![image](https://user-images.githubusercontent.com/105675984/230959413-ad75e1fe-8ce8-49f4-bfc1-85247b67e678.png)
 
 The intent is to utilize the abilities of the Unity Editor itself to instantitate equiptment and design your systems. There, objects can be resized, moved around, and adjusted in real-time while the scene is running. It is possible if desired to build your scene into an executable, which can be then used as presentation material. 
 
