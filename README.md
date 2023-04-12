@@ -44,6 +44,12 @@ All equipment and devices come with their own script and fields that also need t
 
 ![image](https://user-images.githubusercontent.com/105675984/218584052-5b67fdb5-4e44-461f-a5f4-87fe4ebe888d.png)
 
+## Importing Models
+
+This is a good resource for free industrial parts CAD models: [3dfindit](https://www.3dfindit.com/en/)
+
+It is recommened to export the files in their native format (usually STEP), modify them if needed for usage in Unity in any CAD software and then export as FBX for additional work in Blender, or to be imported straight into Unity. 
+
 ## Help Wanted
 
 More equipment and devices,
