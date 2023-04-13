@@ -50,7 +50,7 @@ This is a good resource for free industrial parts CAD models: [3dfindit](https:/
 
 It is recommened to export the files in their native format (usually STEP), modify them if needed for usage in Unity in any CAD software and then export as FBX for additional work in Blender, or to be imported straight into Unity. 
 
-Alternatively most manufacters provide the CAD files directly on their own website. 
+Alternatively most manufacturers provide the CAD files directly on their own website. 
 
 ## Help Wanted
 
