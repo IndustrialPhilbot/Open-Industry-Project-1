@@ -10,7 +10,7 @@ Join our discord group: [Open Industry Project](https://discord.gg/ACRPr6sBpH)
 
 Supported PLCs:
 
-ControlLogix,Micro800/850,PLC-5 ,SLC 500,MicroLogix,Omron NX/NJ Series,Modbus TCP
+ControlLogix,Micro800/850,PLC-5 ,SLC 500,MicroLogix,Omron NX/NJ Series,Modbus TCP (Help us add more!) 
 
 ## Demo
 
