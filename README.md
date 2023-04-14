@@ -40,6 +40,10 @@ Inside the Unity Editor add a PLC object from the 'Assets' folder to the scene a
 
 ![image](https://user-images.githubusercontent.com/105675984/218582555-4a450d03-8b2e-499c-b1ca-a4e286d686b8.png)
 
+Equiptment and Devices are located in inside the assets folder, and can be dragged into the scene:
+
+![image](https://user-images.githubusercontent.com/105675984/232112274-dd880d11-418c-4ab2-97de-e01b064a951b.png)
+
 All equipment and devices come with their own script and fields that also need to be configured
 
 ![image](https://user-images.githubusercontent.com/105675984/218584052-5b67fdb5-4e44-461f-a5f4-87fe4ebe888d.png)
