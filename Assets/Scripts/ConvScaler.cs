@@ -11,17 +11,11 @@ public class ConvScaler : MonoBehaviour
     private float conveyor_speed;
     private bool conveyor_running;
     private float convSpeed;
-    [SerializeField] private bool flipMaterialSlots;
     [SerializeField] private Transform[] convEnds;
     public Transform rollers;
     [SerializeField] private Transform rollersUp;
     [SerializeField] private Transform rollersDown;
     [SerializeField] private GameObject rollerPrefab;
-    private int materialIndex = 0;
-    //[HideInInspector]
-    //public List<Transform> convRollers = new List<Transform>();
-    private bool setRollers;
-    //[HideInInspector]
     public int rollerCount = 0;
     public float curConvSize = 0;
     private const float rollerSize = 0.333f;
@@ -34,7 +28,6 @@ public class ConvScaler : MonoBehaviour
         objectRenderer = conveyor.GetComponent<MeshRenderer>();
         _conveyor = GetComponent<Conveyor>();
         _powerTurn = GetComponent<PowerTurn>();
-        if (flipMaterialSlots) materialIndex = 1;
 
         if (!isStraightConveyor)
         {
