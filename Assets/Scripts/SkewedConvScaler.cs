@@ -22,7 +22,6 @@ public class SkewedConvScaler : MonoBehaviour
     private const float rollerSize = 0.333f;
     private List<MeshRenderer> rollerRenderers = new List<MeshRenderer>();
     public MeshRenderer convR;
-    public int test = 0;
 
     private void Start()
     {
@@ -49,14 +48,13 @@ public class SkewedConvScaler : MonoBehaviour
     private void CreateRollers()
     {
         float convXSize = transform.localScale.x;
-        float skew = GetComponent<SkewedConveyor>().skewAngle;
-        
-        rollerCount = Mathf.RoundToInt(convXSize / rollerSize) + 1 - test;
+
+        rollerCount = Mathf.RoundToInt(convXSize / rollerSize) + 1;
         if (rollers.childCount < rollerCount - 2 && rollerCount > 0)
         {
             Transform newRoller = Instantiate(rollerPrefab, rollers).transform;
             newRoller.localPosition = new Vector3(rollerCount * rollerSize - rollerSize * 2, 0.17f, 0);
-            newRoller.localEulerAngles = new Vector3(0, GetComponent<SkewedConveyor>().skewAngle, 15);
+            newRoller.localEulerAngles = new Vector3(0, _conveyor.skewAngle, 15);
         }
         else if (rollers.childCount > rollerCount - 2)
         {
