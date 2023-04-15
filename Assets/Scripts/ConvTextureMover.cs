@@ -9,16 +9,17 @@ public class ConvTextureMover : MonoBehaviour
     private float conveyor_speed;
     private bool conveyor_running;
     private bool flipped;
+
     [SerializeField] private bool flipMaterialSlots;
     [SerializeField] private MeshRenderer[] convEnds;
     private int materialIndex = 0;
 
     private void Start()
     {
-        Transform conveyor = transform.Find("Conveyor");
-        objectRenderer = conveyor.GetComponent<MeshRenderer>();
-        _conveyor = GetComponent<Conveyor>();
-        _powerTurn = GetComponent<PowerTurn>();
+        
+        objectRenderer = GetComponent<MeshRenderer>();
+        _conveyor = GetComponentInParent<Conveyor>();
+        _powerTurn = GetComponentInParent<PowerTurn>();
 
         if (flipMaterialSlots) materialIndex = 1;
     }
@@ -66,17 +67,18 @@ public class ConvTextureMover : MonoBehaviour
 
     public void RemakeMesh()
     {
-        if(this.gameObject.GetComponentInChildren<PowerTurn>() != null)
+        Transform parentTransform = GetComponentInParent<Transform>();
+        if (this.gameObject.GetComponentInChildren<PowerTurn>() != null)
         {
-            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, 0.51f, 1000f), 1, Mathf.Clamp(transform.localScale.z, 0.51f, 1000f));
+            parentTransform.localScale = new Vector3(Mathf.Clamp(parentTransform.localScale.x, 0.51f, 1000f), 1, Mathf.Clamp(parentTransform.localScale.z, 0.51f, 1000f));
         }
         else
         {
-            transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, 0.51f, 1000f), 1, transform.localScale.z);
+            parentTransform.localScale = new Vector3(Mathf.Clamp(parentTransform.localScale.x, 0.51f, 1000f), 1, parentTransform.localScale.z);
         }
         foreach (var convEnd in convEnds)
         {
-            convEnd.transform.localScale = new Vector3(1f / transform.localScale.x, 1f, 1f);
+            convEnd.transform.localScale = new Vector3(1f / parentTransform.localScale.x, 1f, 1f);
         }
     }
 

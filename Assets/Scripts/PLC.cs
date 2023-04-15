@@ -74,6 +74,7 @@ public class PLC : MonoBehaviour
     public async Task Write(GameObject gameObject, sbyte value)
     {
         bool_tags[gameObject].Value = value;
+        Debug.Log(value);
         await bool_tags[gameObject].WriteAsync();
     }
 

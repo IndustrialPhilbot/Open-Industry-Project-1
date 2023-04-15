@@ -41,7 +41,7 @@ public class Diverter : MonoBehaviour
         }
         
         //Set new rigidbody
-        rb = GetComponent<DiverterAnimator>().GetDiverterRigidbody();
+        rb = GetComponentInChildren<DiverterAnimator>().GetDiverterRigidbody();
 
         startPos = transform.position;
     }

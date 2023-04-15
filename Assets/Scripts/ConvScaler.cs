@@ -24,10 +24,9 @@ public class ConvScaler : MonoBehaviour
 
     private void Start()
     {
-        Transform conveyor = transform.Find("Conveyor");
-        objectRenderer = conveyor.GetComponent<MeshRenderer>();
-        _conveyor = GetComponent<Conveyor>();
-        _powerTurn = GetComponent<PowerTurn>();
+        objectRenderer = GetComponent<MeshRenderer>();
+        _conveyor = GetComponentInParent<Conveyor>();
+        _powerTurn = GetComponentInParent<PowerTurn>();
 
         if (!isStraightConveyor)
         {

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1228496672801016913}
   - component: {fileID: 1228496672801016927}
-  - component: {fileID: 1228496672801016926}
   m_Layer: 6
   m_Name: StraightBeltConveyor
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1228496672801016925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4090027, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5310145477035396584}
@@ -46,26 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f5c50898f663447b6e102a17efcdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enablePLC: 0
+  enablePLC: 1
   tagName: SPEED1
   speed: 1
-  running: 1
---- !u!114 &1228496672801016926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228496672801016925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bdb54a17b1762f4297654d019264d46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flipMaterialSlots: 0
-  convEnds:
-  - {fileID: 2443546886584858027}
-  - {fileID: 2443546886202258197}
+  run: 1
 --- !u!1 &4245140187745178750
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 4245140187745178750}
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0.00000058114523}
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.317279, y: 1, z: 1}
+  m_LocalScale: {x: 0.1489048, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5310145477035396584}
@@ -193,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 4245140188121486016}
   m_LocalRotation: {x: 0.00000004470348, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.317279, y: 1, z: 1}
+  m_LocalScale: {x: 0.1489048, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5310145477035396584}
@@ -277,6 +260,7 @@ GameObject:
   - component: {fileID: 5310145477035396589}
   - component: {fileID: 3191427601294387700}
   - component: {fileID: 344453227}
+  - component: {fileID: 1070503273}
   m_Layer: 6
   m_Name: Conveyor
   m_TagString: Untagged
@@ -293,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 5310145477035396585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.7157, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3576443245291966148}
@@ -381,3 +365,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &1070503273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310145477035396585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdb54a17b1762f4297654d019264d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipMaterialSlots: 0
+  convEnds:
+  - {fileID: 2443546886584858027}
+  - {fileID: 2443546886202258197}

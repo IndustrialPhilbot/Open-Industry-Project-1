@@ -1,11 +1,5 @@
 using UnityEngine;
-using libplctag;
-using libplctag.DataTypes;
-using libplctag.NativeImport; 
-using System;
 using System.Threading.Tasks;
-
-
 public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
@@ -17,7 +11,6 @@ public class Conveyor : MonoBehaviour
 
     Vector3 startPos = new();
     Rigidbody rb;
-
     void Start()
     {
         if (enablePLC)
