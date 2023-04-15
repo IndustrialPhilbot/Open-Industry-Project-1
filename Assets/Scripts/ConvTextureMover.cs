@@ -28,13 +28,13 @@ public class ConvTextureMover : MonoBehaviour
         if (_conveyor != null)
         {
             conveyor_speed = _conveyor.speed;
-            conveyor_running = _conveyor.running;
+            conveyor_running = _conveyor.run;
 
         }
         else
         {
             conveyor_speed = _powerTurn.speed;
-            conveyor_running = _powerTurn.running;
+            conveyor_running = _powerTurn.run;
         }
 
         if (conveyor_speed < 0 && !flipped)

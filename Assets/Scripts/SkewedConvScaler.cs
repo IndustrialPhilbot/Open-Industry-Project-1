@@ -141,7 +141,7 @@ public class SkewedConvScaler : MonoBehaviour
         else
         {
             conveyor_speed = _powerTurn.speed;
-            conveyor_running = _powerTurn.running;
+            conveyor_running = _powerTurn.run;
         }
 
         if (conveyor_running)

@@ -10,36 +10,21 @@ public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
     public string tagName;
-    public float speed = 1;
-    public bool running = false;
+    public float speed = 0;
+    public bool run = false;
 
-    new readonly Tag<DintPlcMapper, int> tag = new();
+    PLC plc;
 
     Vector3 startPos = new();
     Rigidbody rb;
-
-    int scantime = 0;
-    int failCount = 0;
-
 
     void Start()
     {
         if (enablePLC)
         {
-            try { plctag.ForceExtractLibrary = false; } catch { };
-
-            var _plc = GameObject.Find("PLC").GetComponent<PLC>();
-
-            tag.Name = tagName;
-            tag.Gateway = _plc.Gateway;
-            tag.Path = _plc.Path;
-            tag.PlcType = _plc.PlcType;
-            tag.Protocol = _plc.Protocol;
-            tag.Timeout = TimeSpan.FromSeconds(5);
-
-            scantime = _plc.ScanTime;
-
-            InvokeRepeating(nameof(ScanTag), 0, (float)scantime / 1000f);
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(tagName, 1, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
         rb = GetComponentInChildren<Rigidbody>();
@@ -49,7 +34,7 @@ public class Conveyor : MonoBehaviour
     }
     void Update()
     {
-        if (running)
+        if (run)
         {
             rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
             rb.velocity = transform.TransformDirection(Vector3.left) * speed;
@@ -67,21 +52,9 @@ public class Conveyor : MonoBehaviour
             startPos = transform.position;
         }
     }
-    
+
     async Task ScanTag()
     {
-        try
-        {
-            speed = await tag.ReadAsync();
-        }
-        catch (Exception)
-        {
-            if(failCount > 0)
-            {
-                CancelInvoke(nameof(ScanTag));
-                Debug.LogError($"Failed to read tag for object: {gameObject.name} check PLC object settings or Tag Name");
-            }
-            failCount++;
-        }
+        speed = await plc.Read(gameObject);
     }
 }

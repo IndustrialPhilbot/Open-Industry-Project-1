@@ -9,8 +9,8 @@ public class PowerTurn : MonoBehaviour
 {
     public bool enablePLC = false;
     public string tagName;
-    public float speed = 1;
-    public bool running = true;
+    public float speed = 0;
+    public bool run = true;
 
     new readonly Tag<DintPlcMapper, int> tag = new();
 
@@ -19,27 +19,14 @@ public class PowerTurn : MonoBehaviour
     Vector3 startPos = new();
     Vector3 centerOfMass = Vector3.zero;
 
-    int scantime = 0;
-    int failCount = 0;
-
+    PLC plc = new();
     private void Start()
     {
         if (enablePLC)
         {
-            try { plctag.ForceExtractLibrary = false; } catch { };
-
-            var _plc = GameObject.Find("PLC").GetComponent<PLC>();
-
-            tag.Name = tagName;
-            tag.Gateway = _plc.Gateway;
-            tag.Path = _plc.Path;
-            tag.PlcType = _plc.PlcType;
-            tag.Protocol = _plc.Protocol;
-            tag.Timeout = TimeSpan.FromSeconds(5);
-
-            scantime = _plc.ScanTime;
-
-            InvokeRepeating(nameof(ScanTag), 0, (float)scantime / 1000f);
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(tagName, 1, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
         rb = GetComponentInChildren<Rigidbody>();
@@ -49,7 +36,7 @@ public class PowerTurn : MonoBehaviour
 
     void Update()
     {
-        if (running)
+        if (run)
         {
             rb.centerOfMass = centerOfMass;
             rb.WakeUp();
@@ -72,18 +59,6 @@ public class PowerTurn : MonoBehaviour
 
     async Task ScanTag()
     {
-        try
-        {
-            speed = await tag.ReadAsync();
-        }
-        catch (Exception)
-        {
-            if (failCount > 0)
-            {
-                CancelInvoke(nameof(ScanTag));
-                Debug.LogError($"Failed to read tag for object: {gameObject.name} check PLC object settings or Tag Name");
-            }
-            failCount++;
-        }
+        await plc.Read(gameObject);
     }
 }

@@ -17,31 +17,18 @@ public class RetExtConveyor : MonoBehaviour
     public bool enablePLC = false;
     public string tagName;
     public int speed;
-    int scantime = 0;
-    new readonly Tag<DintPlcMapper, int> tag = new();
-    int failCount = 0;
 
     float moveTime = 0.0f;
 
+    PLC plc;
 
     private void Start()
     {
         if (enablePLC)
         {
-            try { plctag.ForceExtractLibrary = false; } catch { };
-
-            var _plc = GameObject.Find("PLC").GetComponent<PLC>();
-
-            tag.Name = tagName;
-            tag.Gateway = _plc.Gateway;
-            tag.Path = _plc.Path;
-            tag.PlcType = _plc.PlcType;
-            tag.Protocol = _plc.Protocol;
-            tag.Timeout = TimeSpan.FromSeconds(5);
-
-            scantime = _plc.ScanTime;
-
-            InvokeRepeating(nameof(ScanTag), 0, (float)scantime / 1000f);
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(tagName, 1, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
     }
 
@@ -61,8 +48,8 @@ public class RetExtConveyor : MonoBehaviour
             {
                 transform.localScale = new Vector3(Mathf.Lerp(retractSize, ExtendSize, moveTime), 1f, 1f);
             }
-            
-            
+
+
         }
 
         if (retract)
@@ -83,18 +70,6 @@ public class RetExtConveyor : MonoBehaviour
 
     async Task ScanTag()
     {
-        try
-        {
-            speed = await tag.ReadAsync();
-        }
-        catch (Exception)
-        {
-            if (failCount > 0)
-            {
-                CancelInvoke(nameof(ScanTag));
-                Debug.LogError($"Failed to read tag for object: {gameObject.name} check PLC object settings or Tag Name");
-            }
-            failCount++;
-        }
+        await plc.Read(gameObject);
     }
 }

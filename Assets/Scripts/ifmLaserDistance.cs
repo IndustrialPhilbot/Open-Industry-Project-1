@@ -8,55 +8,40 @@ using Unity.VisualScripting;
 
 public class ifmLaserDistance : MonoBehaviour
 {
-    new readonly Tag<DintPlcMapper, int> tag = new();
+    public bool enablePLC = false;
     public string tagName;
     public float distance = 10.0f;
-    int scanTime = 0;
+    int value = 0;
+    
+    PLC plc;
 
     void Start()
     {
-        try { plctag.ForceExtractLibrary = false; } catch { };
-
-        var _plc = GameObject.Find("PLC").GetComponent<PLC>();
-
-        tag.Name = tagName;
-        tag.Gateway = _plc.Gateway;
-        tag.Path = _plc.Path;
-        tag.PlcType = _plc.PlcType;
-        tag.Protocol = _plc.Protocol;
-        tag.Timeout = TimeSpan.FromSeconds(1);
-
-        scanTime = _plc.ScanTime;
-
-        try
+        if (enablePLC)
         {
-            InvokeRepeating(nameof(ScanTag), 0, (float)scanTime / 1000f);
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(tagName, 1, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
-        catch (Exception)
-        {
-            Debug.LogError($"Failed to write to tag for object: {gameObject.name} check PLC object settings or Tag Name");
-        }
-
-
     }
     void Update()
     {
         if (Physics.Raycast(transform.position + new Vector3(0, 0, 0), transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance))
         {
             Debug.DrawRay(transform.position + new Vector3(0, 0, 0), transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            tag.Value = Convert.ToInt32(hit.distance * 1000); //Convert to mm
+            value = Convert.ToInt32(hit.distance * 1000); //Convert to mm
             //Debug.Log(tag.Value); 
         }
         else
         {
             Debug.DrawRay(transform.position + new Vector3(0, 0, 0), transform.TransformDirection(Vector3.forward) * distance, Color.red);
-            tag.Value = Convert.ToInt32(distance * 1000); //Convert to mm
+            value = Convert.ToInt32(distance * 1000); //Convert to mm
             //Debug.Log(tag.Value); 
         }
     }
 
     async Task ScanTag()
     {
-        await tag.WriteAsync();
+        await plc.Write(gameObject,value);
     }
 }

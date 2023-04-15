@@ -28,26 +28,16 @@ public class Diverter : MonoBehaviour
     bool divert = false;
     bool cycled = false;
 
-    int scanTime = 0;
+    PLC plc;
 
     // Start is called before the first frame update
     void Start()
     {
         if (enablePLC)
         {
-            try { plctag.ForceExtractLibrary = false; } catch { };
-
-            var _plc = GameObject.Find("PLC").GetComponent<PLC>();
-
-            tag.Name = tagName;
-            tag.Gateway = _plc.Gateway;
-            tag.Path = _plc.Path;
-            tag.PlcType = _plc.PlcType;
-            tag.Protocol = _plc.Protocol;
-
-            scanTime = _plc.ScanTime;
-
-            InvokeRepeating(nameof(ScanTag), 0, (float)scanTime / 1000f);
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(tagName, 0, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
         
         //Set new rigidbody
@@ -103,7 +93,7 @@ public class Diverter : MonoBehaviour
 
     async Task ScanTag()
     {
-        fireDivert = Convert.ToBoolean(await tag.ReadAsync());
+        fireDivert = Convert.ToBoolean(await plc.Read(gameObject));
     }
 
 }
