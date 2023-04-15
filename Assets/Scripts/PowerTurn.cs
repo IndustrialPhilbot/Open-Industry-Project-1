@@ -1,8 +1,4 @@
 using UnityEngine;
-using libplctag;
-using libplctag.DataTypes;
-using libplctag.NativeImport;
-using System;
 using System.Threading.Tasks;
 
 public class PowerTurn : MonoBehaviour
@@ -11,8 +7,6 @@ public class PowerTurn : MonoBehaviour
     public string tagName;
     public float speed = 0;
     public bool run = true;
-
-    new readonly Tag<DintPlcMapper, int> tag = new();
 
     Rigidbody rb;
     Vector3 startAngle = new();

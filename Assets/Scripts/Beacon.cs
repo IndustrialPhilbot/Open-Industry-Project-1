@@ -1,9 +1,4 @@
-using libplctag;
-using libplctag.DataTypes;
-using libplctag.NativeImport;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,7 +7,6 @@ public class Beacon : MonoBehaviour
     public bool enablePLC = false;
     public string tagName;
     public bool lightBeacon = false;
-    new readonly Tag<SintPlcMapper, sbyte> tag = new();
     Material material;
 
     PLC plc;

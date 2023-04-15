@@ -1,11 +1,6 @@
-using libplctag.DataTypes;
-using libplctag;
 using UnityEngine;
-using libplctag.NativeImport;
 using System.Threading.Tasks;
 using System;
-using Unity.VisualScripting;
-
 public class ifmLaserDistance : MonoBehaviour
 {
     public bool enablePLC = false;

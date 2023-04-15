@@ -1,9 +1,4 @@
 using UnityEngine;
-using libplctag;
-using libplctag.DataTypes;
-using libplctag.NativeImport;
-using System;
-using UnityEditor;
 using System.Threading.Tasks;
 
 public class RetExtConveyor : MonoBehaviour

@@ -1,8 +1,4 @@
 using UnityEngine;
-using libplctag;
-using libplctag.DataTypes;
-using libplctag.NativeImport;
-using System;
 using System.Threading.Tasks;
 
 
@@ -13,8 +9,6 @@ public class SkewedConveyor : MonoBehaviour
     public float speed = 0;
     public float skewAngle = 0;
     public bool running = false;
-
-    new readonly Tag<DintPlcMapper, int> tag = new();
 
     Vector3 startPos = new();
     Rigidbody rb;

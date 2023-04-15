@@ -1,9 +1,4 @@
-using libplctag.DataTypes;
-using libplctag;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using libplctag.NativeImport;
 using System.Threading.Tasks;
 using System;
 
@@ -20,8 +15,6 @@ public class Diverter : MonoBehaviour
     public bool fireDivert = false;
     public float divertTime = 0;
     public float divertSpeed = 0;
-
-    new readonly Tag<SintPlcMapper, sbyte> tag = new();
 
     Vector3 startPos = new();
 
