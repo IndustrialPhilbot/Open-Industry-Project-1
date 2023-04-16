@@ -11,9 +11,9 @@ public class Triple_Stack_Light : MonoBehaviour
     public bool segment1 = false;
     public bool segment2 = false;
     public bool segment3 = false;
-    public Color segment1Color = new Color(0, 1.0f, 0.0f, 0.0f);
-    public Color segment2Color = new Color(1.0f, 0.64f, 0.0f, 0.0f);
-    public Color segment3Color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+    public Color segment1Color = new(0, 1.0f, 0.0f, 0.0f);
+    public Color segment2Color = new(1.0f, 0.64f, 0.0f, 0.0f);
+    public Color segment3Color = new(1.0f, 0.0f, 0.0f, 0.0f);
 
     Material materialSeg1;
     Material materialSeg2;
