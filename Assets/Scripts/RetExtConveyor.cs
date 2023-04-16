@@ -4,7 +4,6 @@ using System;
 
 public class RetExtConveyor : MonoBehaviour
 {
-
     public bool Extend;
     public bool retract;
     public float ExtendSize;
