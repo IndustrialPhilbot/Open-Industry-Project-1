@@ -10,12 +10,13 @@ public class ifmLaserDistance : MonoBehaviour
     
     PLC plc;
 
+    Guid id = Guid.NewGuid();
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, gameObject);
+            plc.Connect(tagName, 1, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
     }
@@ -37,6 +38,6 @@ public class ifmLaserDistance : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Write(gameObject,value);
+        await plc.Write(id,value);
     }
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System;
+
 public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
@@ -11,12 +13,14 @@ public class Conveyor : MonoBehaviour
 
     Vector3 startPos = new();
     Rigidbody rb;
+
+    Guid id = Guid.NewGuid();
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, gameObject);
+            plc.Connect(tagName, 1, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -48,6 +52,6 @@ public class Conveyor : MonoBehaviour
 
     async Task ScanTag()
     {
-        speed = await plc.Read(gameObject);
+        speed = await plc.Read(id);
     }
 }

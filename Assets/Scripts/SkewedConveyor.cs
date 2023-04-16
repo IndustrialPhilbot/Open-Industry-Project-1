@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
-
+using System;
 
 public class SkewedConveyor : MonoBehaviour
 {
@@ -14,12 +14,14 @@ public class SkewedConveyor : MonoBehaviour
     Rigidbody rb;
 
     PLC plc;
+
+    Guid id = Guid.NewGuid();
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, gameObject);
+            plc.Connect(tagName, 1, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -55,6 +57,6 @@ public class SkewedConveyor : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Read(gameObject);
+        await plc.Read(id);
     }
 }

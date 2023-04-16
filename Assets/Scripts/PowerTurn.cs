@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System;
 
 public class PowerTurn : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class PowerTurn : MonoBehaviour
     Vector3 centerOfMass = Vector3.zero;
 
     PLC plc;
+
+    Guid id = Guid.NewGuid();
     private void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, gameObject);
+            plc.Connect(tagName, 1, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -53,6 +56,6 @@ public class PowerTurn : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Read(gameObject);
+        await plc.Read(id);
     }
 }

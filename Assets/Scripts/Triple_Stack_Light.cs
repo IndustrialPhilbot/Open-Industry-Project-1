@@ -19,22 +19,27 @@ public class Triple_Stack_Light : MonoBehaviour
     Material materialSeg2;
     Material materialSeg3;
 
+    Guid segment1Id = Guid.NewGuid();
+    Guid segment2Id = Guid.NewGuid();
+    Guid segment3Id = Guid.NewGuid();
+
+
     PLC plc;
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagSegment1, 1, gameObject);
-            plc.Connect(tagSegment2, 1, gameObject);
-            plc.Connect(tagSegment3, 1, gameObject);
+            plc.Connect(tagSegment1, 1, segment1Id);
+            plc.Connect(tagSegment2, 1, segment2Id);
+            plc.Connect(tagSegment3, 1, segment3Id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
-        materialSeg1 = GameObject.Find("Tripple_Stack_Light/Root/color-seg-1").GetComponent<MeshRenderer>().material;
-        materialSeg2 = GameObject.Find("Tripple_Stack_Light/Root/color-seg-2").GetComponent<MeshRenderer>().material;
-        materialSeg3 = GameObject.Find("Tripple_Stack_Light/Root/color-seg-3").GetComponent<MeshRenderer>().material;
- 
+        materialSeg1 = transform.Find("Tripple_Stack_Light/Root/color-seg-1").GetComponent<MeshRenderer>().material;
+        materialSeg2 = transform.Find("Tripple_Stack_Light/Root/color-seg-2").GetComponent<MeshRenderer>().material;
+        materialSeg3 = transform.Find("Tripple_Stack_Light/Root/color-seg-3").GetComponent<MeshRenderer>().material;
+
     }
 
     // Update is called once per frame
@@ -83,9 +88,9 @@ public class Triple_Stack_Light : MonoBehaviour
 
     async Task ScanTag()
     {
-        segment1 = Convert.ToBoolean(await plc.Read(gameObject));
-        segment2 = Convert.ToBoolean(await plc.Read(gameObject));
-        segment3 = Convert.ToBoolean(await plc.Read(gameObject));
+        segment1 = Convert.ToBoolean(await plc.Read(segment1Id));
+        segment2 = Convert.ToBoolean(await plc.Read(segment2Id));
+        segment3 = Convert.ToBoolean(await plc.Read(segment3Id));
     }
 }
 

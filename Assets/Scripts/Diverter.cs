@@ -23,13 +23,15 @@ public class Diverter : MonoBehaviour
 
     PLC plc;
 
+    Guid id = Guid.NewGuid();
+
     // Start is called before the first frame update
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 0, gameObject);
+            plc.Connect(tagName, 0, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
         
@@ -86,7 +88,7 @@ public class Diverter : MonoBehaviour
 
     async Task ScanTag()
     {
-        fireDivert = Convert.ToBoolean(await plc.Read(gameObject));
+        fireDivert = Convert.ToBoolean(await plc.Read(id));
     }
 
 }

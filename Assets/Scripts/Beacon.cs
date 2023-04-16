@@ -10,12 +10,14 @@ public class Beacon : MonoBehaviour
     Material material;
 
     PLC plc;
+
+    Guid id = Guid.NewGuid();
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, gameObject);
+            plc.Connect(tagName, 1, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -37,6 +39,6 @@ public class Beacon : MonoBehaviour
 
     async Task ScanTag()
     {
-        lightBeacon = Convert.ToBoolean(await plc.Read(gameObject));
+        lightBeacon = Convert.ToBoolean(await plc.Read(id));
     }
 }

@@ -16,12 +16,14 @@ public class Photoeye : MonoBehaviour
     sbyte value = 0;
 
     PLC plc;
+
+    Guid id = Guid.NewGuid();
     void Start()
     {
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 0, gameObject);
+            plc.Connect(tagName, 0, id);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
     }
@@ -41,6 +43,6 @@ public class Photoeye : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Write(gameObject, value);
+        await plc.Write(id, value);
     }
 }
