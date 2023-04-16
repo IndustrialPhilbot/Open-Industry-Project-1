@@ -1,6 +1,6 @@
 # OpenIndustryProject
 
-Free and Open-source PLC driven warehouse/manufacturing simulation made with [Unity](https://unity.com/) and [libplctag.NET](https://github.com/libplctag/libplctag.NET). 
+Free and Open-source PLC driven warehouse/manufacturing simulation made with [Unity](https://unity.com/), [OPC UA .NET](https://github.com/OPCFoundation/UA-.NETStandard), and [libplctag](https://github.com/libplctag/libplctag). 
 
 The goal is to provide an open platform for developers to contribute to the creation of virtual industrial equipment/devices and for people to be able to test their ideas or simply educate themselves using a real PLC.
 
@@ -8,9 +8,11 @@ Scroll down to the **Getting Started** section for information on how to work wi
 
 Join our discord group: [Open Industry Project](https://discord.gg/ACRPr6sBpH)
 
-Supported PLCs:
+Supported Communication Protocols:
 
-ControlLogix,Micro800/850,PLC-5 ,SLC 500,MicroLogix,Omron NX/NJ Series,Modbus TCP (Help us add more!) 
+- OPC UA 
+- Ethernet/IP via libplctag
+- Modbus TCP via libplctag
 
 ## Demo
 
@@ -60,10 +62,10 @@ Alternatively most manufacturers provide the CAD files directly on their own web
 
 ## Help Wanted
 
-More equipment and devices,
-better exception handling,
-review code,
-documentation,
-training videos?
+- More equipment and devices
+- Better exception handling
+- Review code
+- Documentation
+- Training videos?
 
 
