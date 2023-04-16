@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 65c2b835f5c26bd459b4f8de24bcde74, type: 3}
       propertyPath: m_Name
-      value: Tripple_Stacklight_FBX Variant
+      value: Triple_Stack_Light_FBX Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3862825179445227854, guid: 65c2b835f5c26bd459b4f8de24bcde74, type: 3}
       propertyPath: m_StaticEditorFlags

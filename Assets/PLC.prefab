@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add0fefeaa3feed48b59333adcd8545f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Protocol: 2
+  PlcType: 0
   Gateway: 192.168.1.1
   Path: 1,0
+  EndPoint: opc.tcp://localhost:62541/discovery
   ScanTime: 0
-  PlcType: 0
-  Protocol: 0
 --- !u!114 &4298422377333317232
 MonoBehaviour:
   m_ObjectHideFlags: 0
