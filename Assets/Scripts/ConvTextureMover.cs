@@ -78,7 +78,7 @@ public class ConvTextureMover : MonoBehaviour
         }
         foreach (var convEnd in convEnds)
         {
-            convEnd.transform.localScale = new Vector3(1f / parentTransform.localScale.x, 1f, 1f);
+            convEnd.transform.localScale = new Vector3(1f / transform.localScale.x, 1f, 1f);
         }
     }
 

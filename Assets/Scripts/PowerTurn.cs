@@ -13,7 +13,7 @@ public class PowerTurn : MonoBehaviour
     Vector3 startPos = new();
     Vector3 centerOfMass = Vector3.zero;
 
-    PLC plc = new();
+    PLC plc;
     private void Start()
     {
         if (enablePLC)
