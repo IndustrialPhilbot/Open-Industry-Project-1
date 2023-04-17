@@ -22,7 +22,8 @@ public class PLC : MonoBehaviour
 
     [ConditionalField(nameof(Protocol), false, "opc_ua")] [SerializeField] private string EndPoint = "opc.tcp://localhost:62541/discovery";
 
-    public int ScanTime = 100;
+    [SerializeField] private int scanTime = 100;
+    public int ScanTime { get { return scanTime; } private set { scanTime = value; } }
 
     readonly Dictionary<Guid, Tag<SintPlcMapper, sbyte>> bool_tags = new();
     readonly Dictionary<Guid, Tag<DintPlcMapper, int>> int_tags = new();
