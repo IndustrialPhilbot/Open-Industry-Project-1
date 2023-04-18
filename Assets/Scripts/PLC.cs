@@ -25,7 +25,6 @@ public class PLC : MonoBehaviour
     [SerializeField] private int scanTime = 100;
     public int ScanTime { get { return scanTime; } private set { scanTime = value; } }
 
-    
     readonly Dictionary<Guid, (GameObject,Tag<SintPlcMapper, sbyte>)> bool_tags = new();
     readonly Dictionary<Guid, (GameObject,Tag<DintPlcMapper, int>)> int_tags = new();
     readonly Dictionary<Guid, (GameObject,Tag<RealPlcMapper, float>)> float_tags = new();
@@ -208,7 +207,7 @@ public class PLC : MonoBehaviour
                 AttributeId = Attributes.Value,
                 Value = new DataValue
                 {
-                    Value = value
+                    Value = Convert.ToBoolean(value)
                 }
             };
 
@@ -240,7 +239,7 @@ public class PLC : MonoBehaviour
                 AttributeId = Attributes.Value,
                 Value = new DataValue
                 {
-                    Value = value
+                    Value = Convert.ToInt16(value)
                 }
             };
 
