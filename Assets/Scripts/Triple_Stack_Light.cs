@@ -30,9 +30,9 @@ public class Triple_Stack_Light : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagSegment1, 1, segment1Id);
-            plc.Connect(tagSegment2, 1, segment2Id);
-            plc.Connect(tagSegment3, 1, segment3Id);
+            plc.Connect(segment1Id, PLC.DataType.Bool, tagSegment1,gameObject);
+            plc.Connect(segment2Id, PLC.DataType.Bool, tagSegment2, gameObject);
+            plc.Connect(segment3Id, PLC.DataType.Bool, tagSegment3, gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -88,9 +88,9 @@ public class Triple_Stack_Light : MonoBehaviour
 
     async Task ScanTag()
     {
-        segment1 = Convert.ToBoolean(await plc.Read(segment1Id));
-        segment2 = Convert.ToBoolean(await plc.Read(segment2Id));
-        segment3 = Convert.ToBoolean(await plc.Read(segment3Id));
+        segment1 = await plc.ReadBool(segment1Id);
+        segment2 = await plc.ReadBool(segment2Id);
+        segment3 = await plc.ReadBool(segment3Id);
     }
 }
 

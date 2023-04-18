@@ -17,7 +17,7 @@ public class Beacon : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, id);
+            plc.Connect(id, PLC.DataType.Bool, tagName,gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -39,6 +39,6 @@ public class Beacon : MonoBehaviour
 
     async Task ScanTag()
     {
-        lightBeacon = Convert.ToBoolean(await plc.Read(id));
+        lightBeacon = await plc.ReadBool(id);
     }
 }

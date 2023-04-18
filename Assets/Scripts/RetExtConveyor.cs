@@ -11,7 +11,7 @@ public class RetExtConveyor : MonoBehaviour
 
     public bool enablePLC = false;
     public string tagName;
-    public int speed;
+    public float speed;
 
     float moveTime = 0.0f;
 
@@ -24,7 +24,7 @@ public class RetExtConveyor : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, id);
+            plc.Connect(id, PLC.DataType.Bool, tagName, gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
     }
@@ -67,6 +67,6 @@ public class RetExtConveyor : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Read(id);
+        speed = await plc.ReadFloat(id);
     }
 }

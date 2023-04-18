@@ -22,7 +22,7 @@ public class PowerTurn : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, id);
+            plc.Connect(id, PLC.DataType.Bool, tagName, gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -56,6 +56,6 @@ public class PowerTurn : MonoBehaviour
 
     async Task ScanTag()
     {
-        await plc.Read(id);
+        speed = await plc.ReadFloat(id);
     }
 }

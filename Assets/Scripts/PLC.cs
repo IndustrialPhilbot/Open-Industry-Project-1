@@ -25,15 +25,24 @@ public class PLC : MonoBehaviour
     [SerializeField] private int scanTime = 100;
     public int ScanTime { get { return scanTime; } private set { scanTime = value; } }
 
-    readonly Dictionary<Guid, Tag<SintPlcMapper, sbyte>> bool_tags = new();
-    readonly Dictionary<Guid, Tag<DintPlcMapper, int>> int_tags = new();
-    readonly Dictionary<Guid, string> opc_tags = new();
+    
+    readonly Dictionary<Guid, (GameObject,Tag<SintPlcMapper, sbyte>)> bool_tags = new();
+    readonly Dictionary<Guid, (GameObject,Tag<DintPlcMapper, int>)> int_tags = new();
+    readonly Dictionary<Guid, (GameObject,Tag<RealPlcMapper, float>)> float_tags = new();
+    readonly Dictionary<Guid, (GameObject,string)> opc_tags = new();
 
     public enum Protocols
     {
         ab_eip,
         modbus_tcp,
         opc_ua
+    }
+
+    public enum DataType
+    {
+        Bool,
+        Int,
+        Float
     }
 
     public Session session;
@@ -66,20 +75,20 @@ public class PLC : MonoBehaviour
 
     // 0 = bool
     // 1 = int
-    public void Connect(string tagName, int dataType, Guid guid)
+    public void Connect(Guid guid, DataType dataType, string tagName, GameObject gameObject)
     {
 
         //OPC UA
         if (Protocol == Protocols.opc_ua)
         {
-            opc_tags.Add(guid, tagName);
+            opc_tags.Add(guid, (gameObject,tagName));
         }
         else
         {
             // libplctag
             try { plctag.ForceExtractLibrary = false; } catch { };
 
-            if (dataType == 0)
+            if (dataType == DataType.Bool)
             {
                 Tag<SintPlcMapper, sbyte> tag = new()
                 {
@@ -91,9 +100,9 @@ public class PLC : MonoBehaviour
                     Timeout = TimeSpan.FromSeconds(5)
                 };
 
-                bool_tags.Add(guid, tag);
+                bool_tags.Add(guid, (gameObject,tag));
             }
-            else if (dataType == 1)
+            else if (dataType == DataType.Int)
             {
                 Tag<DintPlcMapper, int> tag = new()
                 {
@@ -105,27 +114,81 @@ public class PLC : MonoBehaviour
                     Timeout = TimeSpan.FromSeconds(5)
                 };
 
-                int_tags.Add(guid, tag);
+                int_tags.Add(guid, (gameObject, tag));
+            }
+            else if (dataType == DataType.Float)
+            {
+                Tag<RealPlcMapper, float> tag = new()
+                {
+                    Name = tagName,
+                    Gateway = Gateway,
+                    Path = Path,
+                    PlcType = PlcType,
+                    Protocol = (Protocol?)Protocol,
+                    Timeout = TimeSpan.FromSeconds(5)
+                };
+
+                float_tags.Add(guid, (gameObject, tag));
             }
         }
     }
-
-    public async Task<int> Read(Guid guid)
+    public async Task<bool> ReadBool(Guid guid)
     {
-        //OPC UA
-        if (Protocol == Protocols.opc_ua)
+        try
         {
-            return Convert.ToInt32(session.ReadValueAsync(opc_tags[guid]).Result.Value);
+            if (Protocol == Protocols.opc_ua)
+            {
+                return Convert.ToBoolean(session.ReadValueAsync(opc_tags[guid].Item2).Result.Value);
+            }
+            else
+            {
+                return Convert.ToBoolean(await bool_tags[guid].Item2.ReadAsync());
+            }
         }
+        catch
+        {
+            Debug.Log("Failure to read: " + opc_tags[guid].Item2 + " in GameObject: " + opc_tags[guid].Item1.name);
+            return false;
+        }
+    }
 
-        //libplctag
-        if (int_tags.ContainsKey(guid))
+    public async Task<int> ReadInt(Guid guid)
+    {
+        try
         {
-            return await int_tags[guid].ReadAsync();
+            if (Protocol == Protocols.opc_ua)
+            {
+                return Convert.ToInt32(session.ReadValueAsync(opc_tags[guid].Item2).Result.Value);
+            }
+            else
+            {
+                return Convert.ToInt32(await bool_tags[guid].Item2.ReadAsync());
+            }
         }
-        else
+        catch
         {
-            return Convert.ToInt32(await bool_tags[guid].ReadAsync());
+            Debug.Log("Failure to read: " + opc_tags[guid].Item2 + " in GameObject: " + opc_tags[guid].Item1.name);
+            return 0;
+        }
+    }
+
+    public async Task<float> ReadFloat(Guid guid)
+    {
+        try
+        {
+            if (Protocol == Protocols.opc_ua)
+            {
+                return (float)session.ReadValueAsync(opc_tags[guid].Item2).Result.Value;
+            }
+            else
+            {
+                return (float)(await float_tags[guid].Item2.ReadAsync());
+            }
+        }
+        catch
+        {
+            Debug.Log("Failure to read: " + opc_tags[guid].Item2 + " in GameObject: " + opc_tags[guid].Item1.name);
+            return 0;
         }
     }
 
@@ -141,7 +204,7 @@ public class PLC : MonoBehaviour
 
             WriteValue writeValue = new()
             {
-                NodeId = new NodeId(opc_tags[guid]),
+                NodeId = new NodeId(opc_tags[guid].Item2),
                 AttributeId = Attributes.Value,
                 Value = new DataValue
                 {
@@ -151,18 +214,77 @@ public class PLC : MonoBehaviour
 
             writeValues.Add(writeValue);
 
-            await session.WriteAsync(requestHeader, writeValues, new System.Threading.CancellationToken());
+            var writeResult = await session.WriteAsync(requestHeader, writeValues, new System.Threading.CancellationToken());
+            //Debug.Log(writeResult.Results[0].ToString());
         }
-
-        //libplctag
-        bool_tags[guid].Value = value;
-        await bool_tags[guid].WriteAsync();
+        else
+        {
+            //libplctag
+            bool_tags[guid].Item2.Value = value;
+            await bool_tags[guid].Item2.WriteAsync();
+        }
     }
 
     public async Task Write(Guid guid, int value)
     {
-        int_tags[guid].Value = value;
-        await int_tags[guid].WriteAsync();
+        //OPC UA
+        if (Protocol == Protocols.opc_ua)
+        {
+            RequestHeader requestHeader = new();
+
+            WriteValueCollection writeValues = new();
+
+            WriteValue writeValue = new()
+            {
+                NodeId = new NodeId(opc_tags[guid].Item2),
+                AttributeId = Attributes.Value,
+                Value = new DataValue
+                {
+                    Value = value
+                }
+            };
+
+            writeValues.Add(writeValue);
+
+            var writeResult = await session.WriteAsync(requestHeader, writeValues, new System.Threading.CancellationToken());
+            //Debug.Log(writeResult.Results[0].ToString());
+        }
+        else
+        {
+            int_tags[guid].Item2.Value = value;
+            await int_tags[guid].Item2.WriteAsync();
+        }
+    }
+
+    public async Task Write(Guid guid, float value)
+    {
+        //OPC UA
+        if (Protocol == Protocols.opc_ua)
+        {
+            RequestHeader requestHeader = new();
+
+            WriteValueCollection writeValues = new();
+
+            WriteValue writeValue = new()
+            {
+                NodeId = new NodeId(opc_tags[guid].Item2),
+                AttributeId = Attributes.Value,
+                Value = new DataValue
+                {
+                    Value = value
+                }
+            };
+
+            writeValues.Add(writeValue);
+
+            var writeResult = await session.WriteAsync(requestHeader, writeValues, new System.Threading.CancellationToken());
+            //Debug.Log(writeResult.Results[0].ToString());
+        }
+        else
+        {
+            float_tags[guid].Item2.Value = value;
+            await float_tags[guid].Item2.WriteAsync();
+        }
     }
 
 

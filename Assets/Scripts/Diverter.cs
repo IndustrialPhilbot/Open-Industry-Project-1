@@ -31,7 +31,7 @@ public class Diverter : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 0, id);
+            plc.Connect(id, PLC.DataType.Bool, tagName, gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
         
@@ -88,7 +88,7 @@ public class Diverter : MonoBehaviour
 
     async Task ScanTag()
     {
-        fireDivert = Convert.ToBoolean(await plc.Read(id));
+        fireDivert = await plc.ReadBool(id);
     }
 
 }

@@ -20,7 +20,7 @@ public class Conveyor : MonoBehaviour
         if (enablePLC)
         {
             plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(tagName, 1, id);
+            plc.Connect(id, PLC.DataType.Float, tagName,gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
         }
 
@@ -52,6 +52,14 @@ public class Conveyor : MonoBehaviour
 
     async Task ScanTag()
     {
-        speed = await plc.Read(id);
+        try
+        {
+            speed = await plc.ReadFloat(id);
+        }
+        catch(Exception ex)
+        {
+            Debug.LogException(ex);
+        }
+        
     }
 }
