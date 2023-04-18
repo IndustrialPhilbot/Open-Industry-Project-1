@@ -7,6 +7,7 @@ public class ifmDiffuseSensor : MonoBehaviour
     public bool enablePLC = false;
     public string tagName;
     public float distance = 6.0f;
+    
     Transform childTransform;
 
     sbyte value = 0;
