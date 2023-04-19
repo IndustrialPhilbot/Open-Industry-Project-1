@@ -34,7 +34,6 @@ public class Conveyor : MonoBehaviour
         }
         else if(!IsInvoking(nameof(ScanTag)) && enablePLC)
         {
-            Debug.Log("test");
             plc = GameObject.Find("PLC").GetComponent<PLC>();
             plc.Connect(id, PLC.DataType.Float, tagName, gameObject);
             InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);

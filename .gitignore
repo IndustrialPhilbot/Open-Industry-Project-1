@@ -60,6 +60,8 @@ ExportedObj/
 sysinfo.txt
 
 #Unity3D Sample Scene
+New Scene.unity
+New Scene.unity.meta
 SampleScene.unity
 SampleScene.unity.meta
 
@@ -69,4 +71,3 @@ SampleScene.unity.meta
 
 # Crashlytics generated file
 crashlytics-build.properties
-Assets/Scenes/New Scene.unity
