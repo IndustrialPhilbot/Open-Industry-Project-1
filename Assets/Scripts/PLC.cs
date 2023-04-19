@@ -80,7 +80,10 @@ public class PLC : MonoBehaviour
         //OPC UA
         if (Protocol == Protocols.opc_ua)
         {
-            opc_tags.Add(guid, (gameObject,tagName));
+            if (!opc_tags.ContainsKey(guid))
+            {
+                opc_tags.Add(guid, (gameObject, tagName));
+            }
         }
         else
         {

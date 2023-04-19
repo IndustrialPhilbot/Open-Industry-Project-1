@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using System;
+using Unity.VisualScripting;
 
+[SelectionBase]
 public class Conveyor : MonoBehaviour
 {
     public bool enablePLC = false;
@@ -17,20 +19,27 @@ public class Conveyor : MonoBehaviour
     Guid id = Guid.NewGuid();
     void Start()
     {
-        if (enablePLC)
-        {
-            plc = GameObject.Find("PLC").GetComponent<PLC>();
-            plc.Connect(id, PLC.DataType.Float, tagName,gameObject);
-            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
-        }
-
         rb = GetComponentInChildren<Rigidbody>();
 
         startPos = rb.transform.position;
+
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
     void Update()
     {
+
+        if (IsInvoking(nameof(ScanTag)) && !enablePLC)
+        {
+            CancelInvoke(nameof(ScanTag));
+        }
+        else if(!IsInvoking(nameof(ScanTag)) && enablePLC)
+        {
+            Debug.Log("test");
+            plc = GameObject.Find("PLC").GetComponent<PLC>();
+            plc.Connect(id, PLC.DataType.Float, tagName, gameObject);
+            InvokeRepeating(nameof(ScanTag), 0, (float)plc.ScanTime / 1000f);
+        }
+
         if (run)
         {
             rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
