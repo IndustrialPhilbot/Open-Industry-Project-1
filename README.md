@@ -68,7 +68,7 @@ Installation Instructions:
 
 	c. Downloads should start for Unity 2021.3.22f1. This may take awhile to fully download and install. Microsoft .NET Framework 4.8 is also installed during this process.
 
-5. Once Unity Editor is installed, navigate to the 'Projects' tab and 'Open'. Browse to Github project folder from step 1. Select entire folder and 'Open'.
+5. Once Unity Editor is installed, navigate to the 'Projects' tab and 'Open'. Browse to Github project folder from Step #1. Select entire folder and 'Open'.
 
 	![image](https://user-images.githubusercontent.com/131540786/233792840-f17c4c5a-adb9-4b56-a709-38b9710b558e.png)
 
@@ -82,6 +82,8 @@ Installation Instructions:
 
 
 For getting started with Unity refer to: [Getting Started](https://docs.unity3d.com/560/Documentation/Manual/GettingStarted.html)
+
+	For a practical project to learn the basics of Unity refer to the [Roll-a-ball Tutorial](https://learn.unity.com/project/roll-a-ball).
 
 The intent is to utilize the abilities of the Unity Editor itself to instantiate equipment and design your systems. There, objects can be resized, moved around, and adjusted in real-time while the scene is running. It is possible if desired to build your scene into an executable, which can be then used as presentation material. 
 
