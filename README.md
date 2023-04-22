@@ -28,15 +28,37 @@ https://user-images.githubusercontent.com/105675984/232076379-6daaa2ef-f203-4381
 
 ## Getting Started
 
+Installation Instructions:
+1. Download Github Desktop and install on local machine. [Download link](https://desktop.github.com/)
+	a. You don't need an account to download the project file using Github Desktop. In the installation welcome screen, click 'Skip this step' instead of logging in or creating an account.
+	![image](https://user-images.githubusercontent.com/131540786/233792831-d851df0b-e585-4a0f-b43f-aecbf0facac3.png)
+	b. Alternatively, if you don't want the desktop application, download and extract the project folder to your computer. 
+2. Clone the project in Github Desktop using the link from this page.
+	a. In Github Desktop, select 'Clone a repository from the Internet...'. 
+	b. Select the tab 'URL' and then copy and paste the URL from the top of this page. Choose a destination folder. 
+	![image]https://user-images.githubusercontent.com/131540786/233792833-7f62ce6f-0b0b-4251-9d4b-49ba2493a802.png
+	![image](https://user-images.githubusercontent.com/131540786/233792834-c83f14fd-d1c3-45a2-8377-71d74dc88e10.png)
+	c. Click 'Clone'.
+3. Install Git for your operating system. [Git Downloads](https://git-scm.com/downloads)
+	a. Without installing Git, you'll receive an error from Unity when opening the project.
+	b. I kept all settings default during the installation of Git.
+4. Download Unity Hub installer for your operating system from [here](https://unity.com/download).
+	a. Install Unity Hub. 
+	b. Sign in or create an account with Unity. 
+	c. Install Unity Editor using the prompts from Unity Hub (requires 5 GB disk space). Use personal edition license.
+	![image](https://user-images.githubusercontent.com/131540786/233792836-65536a95-f8ff-477f-8782-a7aec40f96cf.png)
+	c. Downloads should start for Unity 2021.3.22f1. This may take awhile to fully download and install. Microsoft .NET Framework 4.8 is also installed during this process.
+5. Once Unity Editor is installed, navigate to the 'Projects' tab and 'Open'. Browse to Github project folder from step 1. Select entire folder and 'Open'.
+	![image](https://user-images.githubusercontent.com/131540786/233792840-f17c4c5a-adb9-4b56-a709-38b9710b558e.png)
+	![image](https://user-images.githubusercontent.com/131540786/233792841-9310017d-d817-422c-b059-433154a44d92.png)
+6. Once imported, click on the project to open in Unity.
+	a. If you get the error 'An error has occurred while resolving packages: Project has invalid dependecies: No 'git' executable was found' you'll need to install Git and restart your computer. This should resolve the error.
+	![image](https://user-images.githubusercontent.com/131540786/233792845-d27d7b22-0b05-4940-8a7e-254d3c3806b9.png)
+
+
 For getting started with Unity refer to: [Getting Started](https://docs.unity3d.com/560/Documentation/Manual/GettingStarted.html)
 
-Clone the repository or download and extract the ZIP file and select the project folder directly in Unity Hub.
-
-The buttons in the below image are located at the top of the repositories page. 
-
-![image](https://user-images.githubusercontent.com/105675984/230959413-ad75e1fe-8ce8-49f4-bfc1-85247b67e678.png)
-
-The intent is to utilize the abilities of the Unity Editor itself to instantitate equiptment and design your systems. There, objects can be resized, moved around, and adjusted in real-time while the scene is running. It is possible if desired to build your scene into an executable, which can be then used as presentation material. 
+The intent is to utilize the abilities of the Unity Editor itself to instantiate equipment and design your systems. There, objects can be resized, moved around, and adjusted in real-time while the scene is running. It is possible if desired to build your scene into an executable, which can be then used as presentation material. 
 
 Inside the Unity Editor add a PLC object from the 'Assets' folder to the scene and fill in the script fields with the necessary data for your test bench. 
 
